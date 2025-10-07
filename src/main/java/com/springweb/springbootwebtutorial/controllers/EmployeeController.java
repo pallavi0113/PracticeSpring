@@ -4,10 +4,12 @@ import com.springweb.springbootwebtutorial.dto.EmployeeDTO;
 import com.springweb.springbootwebtutorial.entities.EmployeeEntity;
 import com.springweb.springbootwebtutorial.repositories.EmployeeRepository;
 import com.springweb.springbootwebtutorial.services.EmployeeService;
+import lombok.Lombok;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/employees")
@@ -39,8 +41,19 @@ public class EmployeeController {
         return employeeService.createNewEmployee(inputEmployee);
     }
 
-    @PutMapping
-    String updateEmployeeById(){
-        return "Hello from put";
+    @PutMapping(path = "/{employeeId}")
+    public EmployeeDTO updateEmployeeById(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeId){
+        return employeeService.updateEmployeeById(employeeId,employeeDTO);
+    }
+
+    @DeleteMapping(path = "/{employeeId}")
+    public boolean deleteEmployeeById(@PathVariable Long employeeId){
+         return employeeService.deleteEmployeeById(employeeId);
+    }
+
+    @PatchMapping(path = "/{employeeId}")
+    public EmployeeDTO updatePartialEmployeeById(@RequestBody Map<String, Object> updates,
+                                                 @PathVariable Long employeeId){
+        return employeeService.updatePartialEmployeeById(employeeId,updates);
     }
 }
