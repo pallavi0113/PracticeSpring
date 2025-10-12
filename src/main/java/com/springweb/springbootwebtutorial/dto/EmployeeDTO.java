@@ -2,6 +2,7 @@ package com.springweb.springbootwebtutorial.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springweb.springbootwebtutorial.annotations.EmployeeRoleValidation;
+import com.springweb.springbootwebtutorial.annotations.ValidPassword;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,9 @@ public class EmployeeDTO {
     @NotBlank(message = "Email cannot be blank")
     @Email(message = "email should be a  valid email")
     private String email;
+
+    @ValidPassword
+    private String password;
 
     @NotNull(message = "Age cannot be null")
     @Max(value = 80, message = "Age cannot be greater than 80")
@@ -48,6 +52,8 @@ public class EmployeeDTO {
     @AssertTrue(message = "employee should be active")
     @JsonProperty("isActive")
     private Boolean isActive;
+
+
 
 
 }

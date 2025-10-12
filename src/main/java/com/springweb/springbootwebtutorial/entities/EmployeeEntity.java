@@ -35,4 +35,6 @@ public class EmployeeEntity {
     private String role;
 
     private Double salary;
+
+    private String password;
 }
